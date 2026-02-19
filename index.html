@@ -80,7 +80,7 @@
 
         .action-btn {
             position: relative;
-            padding: 1.1rem 1.2rem;
+            padding: 1rem 1.2rem;
             font-size: 0.85rem;
             transition: all 0.2s ease;
             border: 0.5px solid rgba(0,0,0,0.1);
@@ -91,7 +91,7 @@
             border-radius: 4px;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .action-btn:active { transform: scale(0.98); background: #fff; }
 
@@ -116,7 +116,7 @@
 
         .quiz-visual-box {
             width: 85%; max-width: 480px; display: flex; justify-content: center; align-items: center;
-            padding: 3rem 2rem; background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.05);
+            padding: 2.5rem 1.5rem; background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.05);
             border-radius: 12px; margin-bottom: 2rem;
         }
 
@@ -128,9 +128,9 @@
         
         @media (max-width: 640px) {
             .mobile-padded { padding-left: 1.5rem; padding-right: 1.5rem; }
-            h2 { font-size: 1.2rem !important; line-height: 1.5 !important; margin-bottom: 1.5rem !important; }
-            .action-btn { font-size: 0.75rem; padding: 0.9rem; }
-            .quiz-visual-box { padding: 2rem 1.5rem; }
+            h2 { font-size: 1.15rem !important; line-height: 1.4 !important; margin-bottom: 1.5rem !important; }
+            .action-btn { font-size: 0.75rem; padding: 0.85rem; }
+            .quiz-visual-box { padding: 1.5rem 1rem; }
         }
     </style>
 </head>
@@ -184,7 +184,7 @@
             <div id="question-render-area" class="w-full flex flex-col items-center justify-center mobile-padded"></div>
         </div>
 
-        <!-- 结果页 -->
+        <!-- 结果报告页 -->
         <div id="result-screen" class="fade-in w-full space-y-12 hidden pb-24 overflow-y-auto px-4 md:px-0">
             <div id="capture-area" class="bg-[#f2f2f0] p-8 md:p-16 border border-black/5 relative overflow-hidden text-left shadow-2xl">
                 <!-- 头部画像 -->
@@ -235,7 +235,7 @@
 
                 <div class="space-y-6 mb-16">
                     <div class="p-10 bg-white border border-black/5 rounded-2xl shadow-sm text-gray-800">
-                        <h4 class="mono-en text-[0.6rem] mb-8 opacity-40 uppercase tracking-widest font-bold text-center">Cognitive DNA // 认知深度解剖</h4>
+                        <h4 class="mono-en text-[0.6rem] mb-8 opacity-40 uppercase tracking-widest font-bold text-center underline underline-offset-8">Cognitive DNA // 认知深度解剖</h4>
                         <div id="result-desc-complex" class="space-y-8 text-base leading-loose font-light text-gray-700"></div>
                     </div>
                 </div>
@@ -244,8 +244,8 @@
                     <div class="absolute -top-4 -left-4 text-9xl opacity-5 serif-en select-none">“</div>
                     <p class="mono-en text-[0.6rem] opacity-40 uppercase tracking-widest font-bold">Aesthetic Soulmate // 审美导师</p>
                     <div class="space-y-2">
-                        <h3 id="mentor-name" class="text-3xl font-black border-b border-black/10 pb-2 inline-block text-gray-800"></h3>
-                        <p id="mentor-style" class="mono-en text-[0.55rem] opacity-40 uppercase mt-1 tracking-widest"></p>
+                        <h3 id="mentor-name" class="text-3xl font-black border-b border-black/10 pb-2 inline-block text-gray-800 text-center w-full"></h3>
+                        <p id="mentor-style" class="mono-en text-[0.55rem] opacity-40 uppercase mt-1 tracking-widest text-center"></p>
                     </div>
                     <p id="mentor-quote" class="text-base italic opacity-70 px-4 leading-relaxed font-light text-gray-600"></p>
                 </div>
@@ -292,21 +292,12 @@
                 { text: "边界模糊产生的视觉眩晕", score: { intuition: 4, context: 6 } }
             ]},
             { text: "02. 观测下方色块分布，你认为哪种更契合你的直觉共鸣？", type: 'svg', content: `<svg width="340" height="240" viewBox="0 0 340 240"><rect x="10" y="50" width="70" height="140" fill="#d98d8d" opacity="0.8"/><rect x="90" y="50" width="70" height="140" fill="#82b0b0" opacity="0.8"/><rect x="170" y="50" width="70" height="140" fill="#c5a059" opacity="0.8"/><rect x="250" y="50" width="70" height="140" fill="#1a1a1a" opacity="0.8"/></svg>`, options: [
-                { text: "层次分明的有序排列", score: { logic: 7, precision: 6 } },
+                { text: "层次分明的有序灰度排列", score: { logic: 7, precision: 6 } },
                 { text: "带有情绪张力的色彩碰撞", score: { intuition: 7, context: 6 } },
                 { text: "寻求各色域之间的微妙平衡", score: { balance: 8, logic: 5 } },
                 { text: "消解色彩，回归纯粹极简", score: { logic: 8, abstraction: 6 } }
             ]},
-            { text: "03. 哪种几何原型的等分排列最能带给你视觉安定感？", type: 'svg', content: `<svg width="400" height="200" viewBox="0 0 400 200">
-                <text x="50" y="50" font-size="12" fill="gray" font-family="Space Mono">01</text>
-                <rect x="25" y="70" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/>
-                <text x="160" y="50" font-size="12" fill="gray" font-family="Space Mono">02</text>
-                <circle cx="145" cy="100" r="35" stroke="black" fill="none" stroke-width="1.5"/>
-                <text x="270" y="50" font-size="12" fill="gray" font-family="Space Mono">03</text>
-                <line x1="245" y1="130" x2="285" y2="70" stroke="black" stroke-width="2"/>
-                <text x="375" y="50" font-size="12" fill="gray" font-family="Space Mono">04</text>
-                <path d="M350,110 Q375,60 400,110" stroke="black" fill="none" stroke-width="2"/>
-            </svg>`, options: [
+            { text: "03. 哪种几何原型的排列逻辑带给你视觉上的安定感？", type: 'svg', content: `<svg width="400" height="200" viewBox="0 0 400 200"><rect x="25" y="70" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/><circle cx="145" cy="100" r="35" stroke="black" fill="none" stroke-width="1.5"/><line x1="255" y1="130" x2="295" y2="70" stroke="black" stroke-width="2"/><path d="M350,110 Q375,60 400,110" stroke="black" fill="none" stroke-width="2"/></svg>`, options: [
                 { text: "方块：逻辑与秩序的确凿边界", score: { logic: 7, precision: 7 } },
                 { text: "圆形：统摄与和谐的自我闭环", score: { balance: 7, intuition: 3 } },
                 { text: "斜线：速度与能量的明确指向", score: { rhythm: 6, logic: 4 } },
@@ -476,9 +467,9 @@
             ]}
         ];
 
-        // --- 深度结果逻辑 ---
+        // --- 深度结果体系 ---
         const archetypes = [
-            { title: "秩序解剖家", sub: "Orderly Anatomist", tags: ["极简主义","逻辑骨架","冷静观测"], condition: s => s.logic > s.intuition && s.precision > 25, desc: "你拥有一双近乎‘X光’的眼睛。在纷杂表象下，你总能瞬间识别出支撑现实的骨架。", complex: ["<strong>认知底色：</strong> 极高的格栅化本能。你习惯将现实编码为可处理的几何单位。","<strong>审美偏好：</strong> 倾向于迪特·拉姆斯式的减法原则，‘少即是多’是你的视觉信仰。"] },
+            { title: "秩序解剖家", sub: "Orderly Anatomist", tags: ["极简主义","逻辑驱动","冷静观测"], condition: s => s.logic > s.intuition && s.precision > 25, desc: "你拥有一双近乎‘X光’的眼睛。在纷杂表象下，你总能瞬间识别出支撑现实的骨架。", complex: ["<strong>认知底色：</strong> 极高的格栅化本能。你习惯将现实编码为可处理的几何单位。","<strong>审美偏好：</strong> 倾向于迪特·拉姆斯式的减法原则，‘少即是多’是你的视觉信仰。"] },
             { title: "感性漫游者", sub: "Romantic Wanderer", tags: ["感受主义","氛围感知","流动想象"], condition: s => s.intuition > s.logic && s.context > 25, desc: "你拒绝被教条定义。模糊的边界、意外的颤动才是你眼中的真相。", complex: ["<strong>处理逻辑：</strong> 你捕捉的是‘情绪的溢出’。视觉对你是一场流动的感官诗学。","<strong>认知本能：</strong> 你能敏锐察觉秩序之外的微妙美感，在无序中发现诗意。"] },
             { title: "结构建筑师", sub: "Structural Architect", tags: ["系统统摄","动态平衡","星座思维"], condition: s => s.balance > 25 && s.logic > 20, desc: "你在寻找一种动态的永恒。你不仅在意点的位置，更在意它如何牵动整个空间的力场。", complex: ["<strong>核心逻辑：</strong> 星座思维。你能将散乱的碎片通过内在逻辑连接成整体。","<strong>美学高度：</strong> 你重视比例的黄金律，在极简中注入了深邃的哲学。"] },
             { title: "抽象解构师", sub: "Abstract Deconstructionist", tags: ["符号叛逆","非线性","空无力量"], condition: s => s.abstraction > 25, desc: "你是视觉意义的‘叛逆者’。你热衷于拆解习以为常的符号，并在虚空中建立新联系。", complex: ["<strong>处理逻辑：</strong> 非代表性感知。你擅长剥离功能的伪装，直达纯粹的能量。","<strong>美学底座：</strong> 意识的感受才是一切视觉的终极目的。"] }
@@ -572,7 +563,8 @@
             document.getElementById('archetype-tags').innerHTML = arch.tags.map(t => `<span class="tag-pill"># ${t}</span>`).join('');
             document.getElementById('result-desc-complex').innerHTML = arch.complex.map(t => `<p>${t}</p>`).join('');
 
-            const lPct = Math.round((scores.logic / (scores.logic + scores.intuition + 1)) * 100);
+            const lTotal = scores.logic + 1, eTotal = scores.intuition + 1;
+            const lPct = Math.round((lTotal / (lTotal + eTotal)) * 100);
             document.getElementById('logic-percent').innerText = lPct + '%';
             document.getElementById('emotion-percent').innerText = (100 - lPct) + '%';
 
