@@ -25,12 +25,11 @@
             color: var(--ink-black);
             font-family: 'Noto Serif SC', serif;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             width: 100vw;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            flex-direction: column;
+            overflow-x: hidden;
             background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
         }
 
@@ -47,10 +46,25 @@
         .axis-x { height: 1px; width: 100%; top: 50%; }
         .axis-y { width: 1px; height: 100%; left: 50%; }
 
+        .color-blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            z-index: -1;
+            animation: blob-float 20s infinite alternate;
+        }
+        @keyframes blob-float {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(20px, 40px) scale(1.1); }
+        }
+
         .moire-specimen {
             position: relative;
             width: 85%;
-            max-width: 420px; 
+            max-width: 380px; 
             aspect-ratio: 1/1;
             border: 0.5px solid rgba(0,0,0,0.1);
             background: #fff;
@@ -58,7 +72,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
             margin-bottom: 2rem;
         }
 
@@ -86,17 +100,18 @@
             border: 0.5px solid rgba(0,0,0,0.1);
             text-align: left;
             width: 100%;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.8);
             backdrop-filter: blur(8px);
-            border-radius: 4px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-bottom: 0.6rem;
         }
         .action-btn:active { transform: scale(0.98); background: #fff; }
 
-        #main-stage > div { display: none; }
-        #main-stage > div.active { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        #main-stage > div { display: none; width: 100%; }
+        #main-stage > div.active { display: flex; flex-direction: column; align-items: center; }
 
         .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent-red); z-index: 100; transition: width 0.4s ease; }
         .fade-in { animation: fadeIn 0.6s ease-out forwards; }
@@ -109,14 +124,14 @@
         
         .back-btn {
             position: absolute;
-            top: 25px; left: 25px;
+            top: 20px; left: 20px;
             font-family: 'Space Mono', monospace; font-size: 0.65rem; text-transform: uppercase;
             letter-spacing: 0.15em; opacity: 0.4; transition: opacity 0.3s; cursor: pointer; z-index: 100; padding: 10px;
         }
 
         .quiz-visual-box {
-            width: 85%; max-width: 480px; display: flex; justify-content: center; align-items: center;
-            padding: 2rem 1.5rem; background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.05);
+            width: 85%; max-width: 440px; display: flex; justify-content: center; align-items: center;
+            padding: 2.5rem 1.5rem; background: rgba(255,255,255,0.4); border: 1px solid rgba(0,0,0,0.05);
             border-radius: 12px; margin-bottom: 2rem;
         }
 
@@ -127,14 +142,13 @@
         }
         
         @media (max-width: 640px) {
-            .mobile-padded { padding-left: 1.5rem; padding-right: 1.5rem; }
-            h2 { font-size: 1.2rem !important; line-height: 1.4 !important; margin-bottom: 1.5rem !important; }
-            .action-btn { font-size: 0.75rem; padding: 0.9rem; }
-            .quiz-visual-box { padding: 1.5rem 1rem; }
+            h2 { font-size: 1.15rem !important; line-height: 1.5 !important; margin-bottom: 1.8rem !important; padding: 0 10px; }
+            .action-btn { font-size: 0.78rem; padding: 1rem; }
+            .quiz-visual-box { padding: 2rem 1rem; margin-bottom: 1.5rem; }
         }
     </style>
 </head>
-<body>
+<body class="py-6 md:py-12">
 
     <div id="progress" class="progress-bar" style="width: 0%"></div>
 
@@ -143,31 +157,35 @@
         <div class="axis axis-y"></div>
     </div>
 
-    <main id="main-stage" class="max-w-4xl mx-auto px-6 relative z-10 h-full">
+    <main id="main-stage" class="max-w-4xl mx-auto px-6 relative z-10 w-full">
         
         <!-- 首页 -->
-        <div id="intro" class="active fade-in space-y-10">
-            <div class="w-full flex justify-center">
-                <div class="hero-graphic-container w-full max-w-[380px]">
-                    <svg viewBox="0 0 300 300" class="w-full h-full">
-                        <g class="animate-[spin_90s_linear_infinite] origin-center opacity-20">
-                            <circle cx="150" cy="150" r="140" class="sketch-svg" stroke-dasharray="2,4"/>
+        <div id="intro" class="active fade-in space-y-10 relative">
+            <div class="color-blob bg-[#d98d8d] top-1/4 -left-1/4"></div>
+            <div class="color-blob bg-[#82b0b0] bottom-1/4 -right-1/4" style="animation-delay: -5s;"></div>
+
+            <div class="w-full flex justify-center py-4">
+                <div class="hero-graphic-container w-full max-w-[320px] relative">
+                    <svg viewBox="0 0 300 300" class="w-full h-full relative z-10">
+                        <g class="animate-[spin_90s_linear_infinite] origin-center">
+                            <circle cx="150" cy="150" r="140" class="sketch-svg" stroke-dasharray="2,4" stroke="var(--accent-blue)" opacity="0.4"/>
+                            <circle cx="150" cy="150" r="120" class="sketch-svg" stroke-dasharray="1,2" stroke="var(--accent-gold)" opacity="0.2"/>
                         </g>
-                        <g class="animate-[spin_40s_linear_infinite] origin-center opacity-40">
-                            <rect x="80" y="80" width="140" height="140" class="sketch-svg" stroke-width="0.3"/>
+                        <g class="animate-[spin_40s_linear_infinite] origin-center opacity-60">
+                            <rect x="80" y="80" width="140" height="140" class="sketch-svg" stroke-width="0.3" stroke="var(--ink-black)"/>
                             <circle cx="150" cy="150" r="6" fill="var(--accent-red)"/>
                         </g>
-                        <circle cx="150" cy="150" r="30" class="sketch-svg" stroke-width="1.5"/>
+                        <circle cx="150" cy="150" r="30" class="sketch-svg" stroke-width="1.5" stroke="var(--ink-black)"/>
                     </svg>
                 </div>
             </div>
-            <div class="text-center space-y-6">
+            <div class="text-center space-y-6 pb-12">
                 <div class="flex flex-col items-center space-y-2 mb-2">
                     <p class="mono-en tracking-[0.5em] opacity-40 uppercase">Visual Intuition Preference</p>
                     <div class="w-12 h-px bg-black opacity-10"></div>
                 </div>
-                <h1 class="text-3xl md:text-5xl font-black tracking-widest leading-tight text-gray-900">视觉直觉偏好</h1>
-                <p class="text-xs md:text-sm opacity-60 max-w-xs mx-auto leading-loose italic font-light text-gray-800 text-center">
+                <h1 class="text-4xl md:text-5xl font-black tracking-widest leading-tight text-gray-900">视觉直觉偏好</h1>
+                <p class="text-sm md:text-base opacity-60 max-w-sm mx-auto leading-loose italic font-light text-gray-800">
                     “观看”并非被动的投影，而是一次审美的再次建模。通过 30 组智性观测，发现你的认知星图。
                 </p>
                 <div class="pt-6">
@@ -179,21 +197,20 @@
         </div>
 
         <!-- 题目容器 -->
-        <div id="quiz-container" class="w-full h-full flex flex-col items-center justify-center relative hidden">
+        <div id="quiz-container" class="w-full relative hidden">
             <div id="back-btn-ui" class="back-btn hidden" onclick="prevQuestion()">← BACK</div>
-            <div id="question-render-area" class="w-full flex flex-col items-center justify-center mobile-padded"></div>
+            <div id="question-render-area" class="w-full flex flex-col items-center py-12"></div>
         </div>
 
         <!-- 结果报告页 -->
-        <div id="result-screen" class="fade-in w-full space-y-12 hidden pb-24 overflow-y-auto px-4 md:px-0">
-            <div id="capture-area" class="bg-[#f2f2f0] p-8 md:p-16 border border-black/5 relative overflow-hidden text-left shadow-2xl">
+        <div id="result-screen" class="fade-in w-full space-y-12 hidden pb-24 overflow-y-auto px-2 md:px-0">
+            <div id="capture-area" class="bg-[#f2f2f0] p-6 md:p-16 border border-black/5 relative overflow-hidden text-left shadow-2xl">
                 
-                <!-- 头部：复刻截图中的样式 -->
                 <div class="flex justify-between items-start mb-12">
-                    <div class="space-y-3">
+                    <div class="space-y-4">
                         <p class="mono-en uppercase tracking-[0.3em] opacity-30 text-[0.6rem]">Visual Profile // 2026</p>
-                        <h2 id="popular-archetype" class="text-4xl font-black tracking-tighter leading-tight text-gray-900">...</h2>
-                        <div class="w-12 h-1 bg-black/10 mt-1"></div>
+                        <h2 id="popular-archetype" class="text-4xl md:text-5xl font-black tracking-tighter leading-tight text-gray-900 italic underline underline-offset-8 decoration-gray-200">...</h2>
+                        <p id="archetype-subtitle" class="mono-en text-[0.7rem] text-gray-400 mt-2 tracking-[0.25em] font-bold uppercase"></p>
                         <div id="archetype-tags" class="flex flex-wrap gap-2 mt-4"></div>
                     </div>
                     <div class="text-right">
@@ -201,12 +218,10 @@
                     </div>
                 </div>
 
-                <!-- 雷达图区域 -->
-                <div class="mb-12 bg-white/60 p-8 rounded-3xl border border-black/5 shadow-inner text-center">
+                <div class="mb-12 bg-white/70 p-8 rounded-3xl border border-black/5 shadow-inner text-center">
                     <canvas id="radarChart" class="w-full max-w-[340px] mx-auto"></canvas>
                 </div>
 
-                <!-- 核心对比百分比 -->
                 <div class="grid grid-cols-2 gap-4 mb-12">
                     <div class="p-6 bg-white border border-black/5 rounded-2xl text-center">
                         <p class="mono-en text-[0.5rem] opacity-40 uppercase mb-1">Logic Depth</p>
@@ -218,7 +233,6 @@
                     </div>
                 </div>
 
-                <!-- 光谱仪区域 -->
                 <div class="space-y-10 mb-16 px-2">
                     <div class="border-b border-black/5 pb-6 text-left">
                         <div class="flex justify-between mono-en text-[0.6rem] mb-2 opacity-50 uppercase tracking-tighter font-bold">
@@ -236,7 +250,6 @@
                     </div>
                 </div>
 
-                <!-- 深度解析 -->
                 <div class="space-y-6 mb-16">
                     <div class="p-10 bg-white border border-black/5 rounded-2xl shadow-sm text-gray-800">
                         <h4 class="mono-en text-[0.6rem] mb-8 opacity-40 uppercase tracking-widest font-bold text-center underline underline-offset-8">Cognitive DNA Analysis</h4>
@@ -244,7 +257,6 @@
                     </div>
                 </div>
 
-                <!-- 导师卡片 -->
                 <div class="mb-16 p-10 border border-black/10 bg-white/80 rounded-2xl text-center space-y-6 relative overflow-hidden shadow-md">
                     <div class="absolute -top-4 -left-4 text-9xl opacity-5 serif-en select-none">“</div>
                     <p class="mono-en text-[0.6rem] opacity-40 uppercase tracking-widest font-bold">Spiritual Mentor</p>
@@ -255,7 +267,6 @@
                     <p id="mentor-quote" class="text-base italic opacity-70 px-4 leading-relaxed font-light text-gray-600"></p>
                 </div>
 
-                <!-- 百科词条与书单 -->
                 <div class="grid grid-cols-1 gap-12 mb-16">
                     <div class="p-10 bg-white border border-black/5 rounded-2xl shadow-inner">
                         <h4 class="mono-en text-[0.65rem] mb-10 text-gray-400 uppercase tracking-[0.3em] font-bold text-center">Visual Encyclopedia</h4>
@@ -268,26 +279,16 @@
                     </div>
                 </div>
 
-                <!-- 二维码合成位：根据截图复刻排版 -->
-                <div id="qr-synthesis-area" class="flex flex-col items-center gap-6 py-12 border-t border-black/5 mt-12">
-                    <div class="p-1.5 bg-white border border-white shadow-sm flex items-center justify-center">
-                        <img id="final-qr-image" 
-                             src="wechat-qr.png" 
-                             crossorigin="anonymous"
-                             class="w-28 h-28 grayscale opacity-60 transition-all hover:opacity-100" 
-                             alt="QR" 
-                             onerror="this.outerHTML='<div class=\'w-28 h-28 border border-dashed border-gray-300 flex items-center justify-center text-[8px] text-gray-300 uppercase\'>Synthesis Area</div>';">
-                    </div>
-                    <div class="text-center space-y-2">
-                        <p class="mono-en text-[0.7rem] text-gray-400 italic font-bold tracking-[0.2em] uppercase">Visual Research Archive</p>
-                        <p class="text-[0.65rem] text-gray-400 font-light tracking-widest">保存报告，延续视觉思索</p>
+                <!-- 二维码占位区域：200x200px 虚线框 -->
+                <div id="qr-placeholder-wrapper" class="flex flex-col items-center py-12 border-t border-black/5 mt-12">
+                    <div id="dynamic-qr-container" class="w-[200px] h-[200px] border border-dashed border-gray-300 bg-transparent">
+                        <!-- 后续二维码将动态渲染于此 -->
                     </div>
                 </div>
                 
                 <div class="text-center pt-8 opacity-20 mono-en text-[0.55rem]">© 2026 RPDC DESIGN WEEK // CURATED BY @云树cloudtree</div>
             </div>
 
-            <!-- 底部按钮 -->
             <div class="flex gap-4 px-2 pb-12">
                 <button onclick="location.reload()" class="flex-1 py-5 border border-black text-[11px] mono-en uppercase active:bg-white tracking-widest">RE-TEST</button>
                 <button id="save-btn" onclick="saveAsImage()" class="flex-1 py-5 bg-black text-white text-[11px] mono-en uppercase active:opacity-80 tracking-widest font-bold shadow-xl">SAVE REPORT</button>
@@ -296,7 +297,6 @@
     </main>
 
     <script>
-        // --- 核心题库：修复了所有题目去重与排版间距 ---
         const quizData = [
             { text: "01. 在莫瑞波纹产生的知觉干涉中，你下意识倾向于捕捉？", type: 'moire', options: [
                 { text: "底层恒定的几何网格系统", score: { logic: 6, precision: 5, micro: 5 } },
@@ -310,7 +310,7 @@
                 { text: "寻求各色域之间的微妙平衡", score: { balance: 8, logic: 5 } },
                 { text: "消解色彩，回归纯粹极简", score: { logic: 8, abstraction: 6 } }
             ]},
-            { text: "03. 哪种几何原型的排列逻辑带给你视觉上的安定感？", type: 'svg', content: `<svg width="400" height="200" viewBox="0 0 400 200"><rect x="25" y="70" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/><circle cx="145" cy="100" r="35" stroke="black" fill="none" stroke-width="1.5"/><line x1="255" y1="130" x2="295" y2="70" stroke="black" stroke-width="2"/><path d="M350,110 Q375,60 400,110" stroke="black" fill="none" stroke-width="2"/></svg>`, options: [
+            { text: "03. 哪种几何原型的等分排列逻辑，带给你更深的安定感？", type: 'svg', content: `<svg width="400" height="180" viewBox="0 0 400 180"><rect x="25" y="60" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/><circle cx="145" cy="90" r="35" stroke="black" fill="none" stroke-width="1.5"/><line x1="255" y1="120" x2="295" y2="60" stroke="black" stroke-width="2"/><path d="M350,100 Q375,50 400,100" stroke="black" fill="none" stroke-width="2"/></svg>`, options: [
                 { text: "方块：逻辑与秩序的确凿边界", score: { logic: 7, precision: 7 } },
                 { text: "圆形：统摄与和谐的自我闭环", score: { balance: 7, intuition: 3 } },
                 { text: "斜线：速度与能量的明确指向", score: { rhythm: 6, logic: 4 } },
@@ -322,47 +322,173 @@
                 { text: "交错的城市街道，充满向心力", score: { balance: 6, logic: 5 } },
                 { text: "无边界的天际线，宏大且空无", score: { macro: 7, abstraction: 5 } }
             ]},
-            { text: "05. 面对一副关于雨后水痕的摄影，你更在意？", options: [
-                { text: "水滴在重力牵引下的流向逻辑", score: { logic: 7, precision: 6 } },
-                { text: "水痕在光影下形成的朦胧质感", score: { intuition: 8, context: 7 } },
-                { text: "密集水痕与大面积玻璃的留白张力", score: { balance: 7, abstraction: 6 } },
-                { text: "这种自然生成的非对称几何美感", score: { abstraction: 8, balance: 5 } }
+            { text: "05. 整理个人工作台时，你的驱动力本能倾向于是？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="20" y="40" width="50" height="25" fill="black"/><rect x="80" y="40" width="50" height="25" fill="black"/><rect x="140" y="40" width="50" height="25" fill="black"/><path d="M220,50 L320,50" stroke="black" stroke-width="0.2" stroke-dasharray="2,2"/></svg>`, options: [
+                { text: "严丝合缝的垂直对齐与严密分类", score: { logic: 8, precision: 8 } },
+                { text: "保留富有呼吸感的随机留白间隙", score: { balance: 7, abstraction: 5 } },
+                { text: "根据使用频率构成的动态路径", score: { rhythm: 7, context: 5 } },
+                { text: "并不在意，享受这种随意的无序", score: { intuition: 6, rad: 7 } }
+            ]},
+            { text: "06. 观看这个旋转中心，你捕捉到的是？", type: 'svg', content: `<div class="w-36 h-36 border border-black/10 rounded-full flex items-center justify-center animate-[spin_15s_linear_infinite] mx-auto"><div class="w-24 h-0.5 bg-black/60"></div></div>`, options: [
+                { text: "周而复始、精确的时间规律感", score: { logic: 7, precision: 7 } },
+                { text: "轨迹模糊化带来的视觉残影美", score: { abstraction: 8, context: 6 } },
+                { text: "向心的视觉引力与封闭结构", score: { balance: 7, micro: 5 } },
+                { text: "流动的、无始无终的变幻意蕴", score: { intuition: 8, rhythm: 8 } }
+            ]},
+            { text: "07. 在一个极简设计的展厅里，你更在意的是？", options: [
+                { text: "展品之间精密的比例与尺度关系", score: { logic: 8, precision: 7 } },
+                { text: "光线在墙面上形成的氛围扩散", score: { intuition: 8, context: 8 } },
+                { text: "展品本身微小、确凿的工艺细节", score: { precision: 9, micro: 8 } },
+                { text: "整个空间宏大且虚空的叙事感", score: { macro: 8, abstraction: 7 } }
+            ]},
+            { text: "08. 面对一扇透视窗户，你的注意力终点是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="100" y="20" width="140" height="110" fill="none" stroke="black" stroke-width="1"/><line x1="170" y1="20" x2="170" y2="130" stroke="black"/><line x1="100" y1="75" x2="240" y2="75" stroke="black"/></svg>`, options: [
+                { text: "建筑构成的垂直地平线规律", score: { logic: 7, precision: 6 } },
+                { text: "光影洒进窗框时的氛围扩散", score: { intuition: 7, context: 8 } },
+                { text: "不同距离景物的叠压层次感", score: { balance: 6, macro: 7 } },
+                { text: "窗框作为几何图形的纯粹解构", score: { abstraction: 8, logic: 5 } }
+            ]},
+            { text: "09. 哪种材质对比更让你感到审美上的治愈？", options: [
+                { text: "冰冷的精钢与极致透明的玻璃", score: { logic: 9, precision: 8 } },
+                { text: "温润的胡桃木与粗砺的天然陶土", score: { intuition: 8, context: 8 } },
+                { text: "带有毛刷质感的非对称拼贴界面", score: { abstraction: 8, balance: 6 } },
+                { text: "光影斑驳的白墙与动态植物投影", score: { context: 9, rhythm: 7 } }
+            ]},
+            { text: "10. 认知的本质对你而言更像是一个？", options: [
+                { text: "步步为营、逻辑自洽的精密装置", score: { logic: 10, precision: 9 } },
+                { text: "一片随气流涌动而瞬息万变的云雾", score: { intuition: 10, context: 9 } },
+                { text: "一张通过内在节点相连的认知星图", score: { balance: 10, rhythm: 8 } },
+                { text: "一叠由不相关碎片拼贴而成的偶然", score: { abstraction: 10, rad: 9 } }
             ]},
             { text: "11. 观测下方图形，你的视线最先捕捉到？", type: 'svg', content: `<svg width="340" height="220" viewBox="0 0 340 220"><circle cx="170" cy="110" r="90" stroke="black" stroke-width="0.5" fill="none"/><circle cx="170" cy="110" r="12" fill="#d98d8d"/><line x1="170" y1="10" x2="170" y2="210" stroke="black" opacity="0.1"/></svg>`, options: [
-                { text: "A. 红色的几何绝对坐标原点 (Detail)", score: { precision: 7, micro: 7 } },
-                { text: "B. 外部圆环对空间的扩张力 (Macro)", score: { macro: 7, rhythm: 4 } },
-                { text: "C. 虚实交界处的张力平衡 (Stability)", score: { balance: 6, abstraction: 5 } },
-                { text: "D. 整张画面的网格底纹逻辑 (System)", score: { logic: 6, ref: 5 } }
+                { text: "A. 红色的几何绝对坐标原点 (Detail)", score: { precision: 8, micro: 8 } },
+                { text: "B. 外部圆环对空间的扩张力 (Macro)", score: { macro: 8, rhythm: 5 } },
+                { text: "C. 虚实交界处的张力平衡 (Stability)", score: { balance: 7, abstraction: 6 } },
+                { text: "D. 整张画面的网格底纹逻辑 (System)", score: { logic: 7, ref: 6 } }
+            ]},
+            { text: "12. 整理个人藏书时，你下意识的分类逻辑是？", options: [
+                { text: "严格按照拼音或学科属性的纵向切分", score: { logic: 8, precision: 9 } },
+                { text: "按照封面颜色形成的感性色谱流动", score: { intuition: 8, context: 6 } },
+                { text: "高低不齐，但追求视觉重心的动态均衡", score: { balance: 9, rhythm: 5 } },
+                { text: "随机堆叠，享受一种充满活力的杂乱", score: { rad: 8, abstraction: 7 } }
+            ]},
+            { text: "13. 面对这种光影交错，你的第一知觉反应是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><defs><linearGradient id="gl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:black;stop-opacity:1" /><stop offset="100%" style="stop-color:white;stop-opacity:1" /></linearGradient></defs><rect x="0" y="0" width="340" height="150" fill="url(#gl)" opacity="0.3"/><path d="M40,20 L300,130" stroke="black" stroke-width="0.5" stroke-dasharray="4,4"/></svg>`, options: [
+                { text: "由暗到明的逻辑推导与演变过程", score: { logic: 7, precision: 6 } },
+                { text: "边缘交融处产生的弥散、静谧的情绪", score: { intuition: 9, context: 9 } },
+                { text: "虚线切分产生的视觉节奏与跳跃感", score: { rhythm: 8, balance: 7 } },
+                { text: "光影作为独立符号的几何抽象感", score: { abstraction: 9, rad: 7 } }
+            ]},
+            { text: "14. 在一张复杂的信息图界面中，你的注意力倾向于？", options: [
+                { text: "优先捕捉数据间的严谨因果链条", score: { logic: 9, precision: 8 } },
+                { text: "整体配色方案营造的视觉首要印象", score: { intuition: 8, context: 7 } },
+                { text: "图表控件的对称性与比例和谐度", score: { balance: 8, micro: 6 } },
+                { text: "这种数字化呈现形式的解构与重组", score: { abstraction: 8, rad: 8 } }
+            ]},
+            { text: "15. 观察这组几何偏移，你最在意的细微之处是？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="100" y="30" width="60" height="40" fill="black"/><rect x="180" y="40" width="60" height="40" fill="black" opacity="0.4"/></svg>`, options: [
+                { text: "两物体中心轴线的偏离数值 (Error)", score: { logic: 8, precision: 8 } },
+                { text: "由于偏移产生的某种动态追逐趋势", score: { rhythm: 7, rad: 6 } },
+                { text: "重合部分产生的视觉深度与纵深感", score: { balance: 6, context: 7 } },
+                { text: "图形交叠处产生的逻辑重构意义", score: { abstraction: 9, logic: 6 } }
+            ]},
+            { text: "16. 面对自然界的树木枝桠，你本能地关注：", options: [
+                { text: "其不断分形、重复的数学化增长规律", score: { logic: 8, precision: 7 } },
+                { text: "枝干在空气中摇曳出的韵律美感", score: { intuition: 8, rhythm: 9 } },
+                { text: "枯木与苍穹构成的负空间张力剪影", score: { balance: 7, abstraction: 9 } },
+                { text: "树皮肌理中沉淀出的生命微观细节", score: { context: 8, micro: 9 } }
+            ]},
+            { text: "17. 当信息流出现无序噪声干扰时，你会？", options: [
+                { text: "本能地试图清除噪声，建立格栅系统", score: { logic: 10, precision: 9 } },
+                { text: "在无序中寻找随机产生的知性韵律", score: { intuition: 9, rhythm: 8 } },
+                { text: "通过噪声密度变化感知隐形的空间感", score: { balance: 8, context: 7 } },
+                { text: "将噪声视作一种野蛮生长的生态美学", score: { abstraction: 9, rad: 8 } }
+            ]},
+            { text: "18. 在这个“负空间”构成中，你首选注意到：", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="80" y="30" width="180" height="90" fill="black"/><rect x="120" y="50" width="100" height="50" fill="#f2f2f0"/></svg>`, options: [
+                { text: "黑色的矩形边框：它是实体的支撑", score: { logic: 7, precision: 7 } },
+                { text: "内部被挖空的空白：它是视觉中心", score: { balance: 9, micro: 8 } },
+                { text: "交界处极细的、充满压力的边缘线", score: { abstraction: 9, rhythm: 6 } },
+                { text: "这种嵌套逻辑传达出的比例严谨度", score: { logic: 8, balance: 7 } }
+            ]},
+            { text: "19. 你倾向于在何种视觉密度中停留更久？", options: [
+                { text: "极致简洁：单一线条带来的绝对纯粹", score: { logic: 9, abstraction: 8 } },
+                { text: "适度叠加：有呼吸感的网格状有序排列", score: { balance: 9, precision: 7 } },
+                { text: "极度繁复：充满生命力与偶然的堆砌", score: { intuition: 9, context: 8 } },
+                { text: "解构拼贴：不同逻辑碎片碰撞的偶发感", score: { abstraction: 10, rad: 9 } }
+            ]},
+            { text: "20. 对你而言，视觉上的“平衡感”更接近：", options: [
+                { text: "天平两端完全对等的物理质量", score: { logic: 8, balance: 10 } },
+                { text: "通过质感、冷暖色调抵消形状的偏移", score: { intuition: 9, context: 8 } },
+                { text: "由心理重心支撑的、危险的非对称", score: { balance: 9, abstraction: 9 } },
+                { text: "一种瞬间即逝、不断位移的弹性张力", score: { rhythm: 9, rad: 8 } }
+            ]},
+            { text: "21. 一个新城市的空中俯瞰图，最先吸引你的是？", options: [
+                { text: "交错街道构成的网格化功能逻辑", score: { logic: 8, precision: 7 } },
+                { text: "万家灯火汇聚而成的弥散氛围场", score: { intuition: 9, context: 8 } },
+                { text: "新旧建筑更迭产生的视觉结构断层", score: { balance: 7, abstraction: 8 } },
+                { text: "城市作为复杂分形系统的自然演化感", score: { macro: 8, rhythm: 6 } }
+            ]},
+            { text: "22. 面对这组重力博弈，你感到哪种力量最迷人？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="145" y="90" width="50" height="50" fill="black"/><path d="M20,140 L320,140" stroke="black"/></svg>`, options: [
+                { text: "物体稳稳落在基准面上的确凿稳定性", score: { logic: 8, precision: 7 } },
+                { text: "地平线向两侧无限延伸的宏大尺度", score: { macro: 8, rhythm: 6 } },
+                { text: "黑色几何体向下沉降造成的心理压力", score: { balance: 9, micro: 5 } },
+                { text: "这是构件之间瞬间形成的结构默契", score: { abstraction: 8, ref: 7 } }
+            ]},
+            { text: "23. 哪种视觉定义最符合你对“高级感”的认知？", options: [
+                { text: "严丝合缝、不容辩驳的比例掌控力", score: { logic: 9, precision: 10 } },
+                { text: "富有精神高度的大面积、留白式张力", score: { balance: 10, abstraction: 8 } },
+                { text: "带有岁月沉淀质感、非人造的痕迹", score: { context: 9, intuition: 8 } },
+                { text: "彻底打破常规直觉的知性冷感与挑衅", score: { rad: 9, rhythm: 7 } }
+            ]},
+            { text: "24. 你倾向于认同哪种笔触蕴含的思辨高度？", options: [
+                { text: "连续、平稳、作为结论出现的定论线", score: { logic: 8, precision: 7 } },
+                { text: "跳跃、断续、作为某种假设的探索线", score: { intuition: 8, rad: 6 } },
+                { text: "由于干涉而产生、揭示真相的重叠线", score: { abstraction: 9, balance: 7 } },
+                { text: "生命不规则波动下产生的手写体墨迹", score: { context: 8, intuition: 8 } }
+            ]},
+            { text: "25. 面对一处老工厂的工业遗迹，你看到的是：", options: [
+                { text: "对原有机械功能的严密结构回溯", score: { logic: 8, precision: 7 } },
+                { text: "铁锈与荒草共生出的悲剧性氛围", score: { intuition: 9, context: 8 } },
+                { text: "巨大钢架与水平荒原之间的比例博弈", score: { balance: 7, abstraction: 8 } },
+                { text: "这是一种非线性时间的视觉凝固形式", score: { rhythm: 7, macro: 7 } }
+            ]},
+            { text: "26. 你更倾向于在哪个时刻按下快门？", options: [
+                { text: "当所有元素达到绝对对称与有序瞬间", score: { logic: 9, balance: 10 } },
+                { text: "当光线在空气中即将消散的朦胧时刻", score: { intuition: 10, context: 9 } },
+                { text: "当事物呈现出某种不确定的张力节点", score: { rhythm: 8, rad: 7 } },
+                { text: "当被摄物彻底背离其日常社会属性时", score: { abstraction: 10, rad: 9 } }
+            ]},
+            { text: "27. 你对“极简主义”的终极理解倾向于：", options: [
+                { text: "功能的最大化透明与逻辑纯洁性", score: { logic: 10, precision: 9 } },
+                { text: "空无中蕴含的无限灵性与禅意掌控", score: { balance: 10, abstraction: 8 } },
+                { text: "剥离一切装饰干扰，回归物性本身", score: { context: 9, intuition: 8 } },
+                { text: "一种克制的冷感审美与知性距离", score: { abstraction: 8, ref: 9 } }
+            ]},
+            { text: "28. 哪种视觉符号最能引发你的审美博弈？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><path d="M170,10 L170,90 M130,50 L210,50" stroke="black" stroke-width="0.3"/><circle cx="170" cy="50" r="35" stroke="black" fill="none" stroke-dasharray="2,2"/></svg>`, options: [
+                { text: "代表功能的坐标参考系与绝对基准", score: { logic: 8, precision: 9 } },
+                { text: "代表感性流转的模糊虚线圆环轨迹", score: { intuition: 8, rhythm: 7 } },
+                { text: "十字轴心与圆构成的原始仪式感秩序", score: { balance: 9, abstraction: 6 } },
+                { text: "空间被网格切分后形成的重构博弈", score: { abstraction: 9, rad: 8 } }
+            ]},
+            { text: "29. 视觉直觉对你而言，其本质更接近：", options: [
+                { text: "一种内化的数学建模与逻辑纠错系统", score: { logic: 10, precision: 9 } },
+                { text: "一次灵魂与外界氛围的瞬间生命共振", score: { intuition: 10, context: 9 } },
+                { text: "对世界客观关系的统摄与动态均衡", score: { balance: 10, macro: 8 } },
+                { text: "在碎片中发现非线性规律的解构旅程", score: { abstraction: 10, rad: 10 } }
+            ]},
+            { text: "30. 观测这张最后的星图，你的终极反馈是？", type: 'svg', content: `<svg viewBox="0 0 200 200" class="w-48 h-48 opacity-40"><circle cx="100" cy="100" r="90" stroke="black" fill="none" stroke-dasharray="1,3"/><circle cx="100" cy="100" r="4" fill="black"/><path d="M60,60 L140,140 M140,60 L60,140" stroke="black" stroke-width="0.2"/></svg>`, options: [
+                { text: "秩序的终点：一切终将归于确凿结论", score: { logic: 9, precision: 8 } },
+                { text: "漫游的起点：一切均在流动与变幻中", score: { intuition: 10, macro: 8 } },
+                { text: "平衡的极致：在失序中寻找静止核心", score: { balance: 10, micro: 7 } },
+                { text: "解构的自由：看到点线面背后的无物", score: { abstraction: 10, rad: 9 } }
             ]}
         ];
 
-        // 补全后 30 道智性原创题
-        const themes = ["工作台秩序", "博物馆观感", "书架排布", "重力博弈", "错觉还原", "噪声感知", "负空间张力", "光影共鸣", "材质触感", "系统统摄"];
-        for(let i=6; i<=30; i++) {
-            if(i === 11) continue;
-            quizData.push({
-                text: `${String(i).padStart(2, '0')}. 当面对一组${themes[i % themes.length]}的视觉挑战，你的本能是？`,
-                type: 'none',
-                options: [
-                    { text: "寻找那些能够串联逻辑的锚点", score: { logic: 5, precision: 6 } },
-                    { text: "感知色彩与排版带来的情绪流动", score: { intuition: 6, context: 5 } },
-                    { text: "关注构图中的重心与呼吸感", score: { balance: 6, rhythm: 4 } },
-                    { text: "试图解构其背后隐藏的符号系统", score: { abstraction: 6, rad: 5 } }
-                ]
-            });
-        }
-        quizData.sort((a,b) => parseInt(a.text) - parseInt(b.text));
-
-        // --- 画像逻辑 ---
         const archetypes = [
-            { title: "理性极简主义者", sub: "Orderly Anatomist", tags: ["理性驱动","骨架重构","极致减法"], condition: s => s.logic > s.intuition && s.precision > 25, desc: "你拥有一双近乎‘X光’的眼睛。在纷杂表象下，你总能瞬间识别出支撑现实的骨架。", complex: ["<strong>处理逻辑：</strong> 格栅化本能。你习惯将视觉信息拆解为可处理的几何单位。","<strong>审美偏好：</strong> 拒绝冗余。你认为美存在于数学般的严密与极致的克制之中。"] },
-            { title: "感性浪漫漫游者", sub: "Romantic Wanderer", tags: ["氛围感知","情感溢出","诗意解构"], condition: s => s.intuition > s.logic && s.context > 25, desc: "你拒绝被教条的几何定义。模糊的边界、意外的颤动才是你眼中的视觉真相。", complex: ["<strong>认知底色：</strong> 你捕捉的是‘情绪的溢出’。视觉对你是一场流动的感官诗学，而非死板的制图。","<strong>直觉深度：</strong> 你能敏锐察觉秩序之外的微妙美感，擅长在无序中发现诗意。"] },
-            { title: "系统架构平衡师", sub: "Structural Architect", tags: ["系统统摄","动态均衡","节点思维"], condition: s => s.balance > 25 && s.logic > 20, desc: "你在寻找一种动态的永恒。你不仅在意点的位置，更在意它如何牵动整个空间的力场。", complex: ["<strong>核心逻辑：</strong> 星座思维。你能将散乱的视觉碎片通过内在逻辑连接成整体的认知星图。","<strong>美学高度：</strong> 你重视比例的黄金律，在极简的形态中注入了深邃的哲学。"] },
-            { title: "抽象解构主义者", sub: "Deconstructionist", tags: ["符号叛逆","非线性","空无力量"], condition: s => s.abstraction > 25, desc: "你是视觉意义的‘叛逆者’。你热衷于拆解习以为常的符号，并从虚空中建立新的联系。", complex: ["<strong>处理逻辑：</strong> 非代表性感知。你擅长剥离功能的伪装，直接观测形式能量。","<strong>美学底座：</strong> 至上主义倾向。你认为意识的纯粹感受才是一切视觉的终极目的。"] }
+            { title: "理性极简主义者", sub: "Orderly Anatomist", tags: ["理性重构","冷感美学","极致减法"], condition: s => s.logic > s.intuition && s.precision > 25, desc: "你拥有一双近乎‘X光’的眼睛。在纷杂表象下，你总能瞬间识别出支撑现实的骨架。", complex: ["<strong>处理逻辑：</strong> 格栅化本能。你习惯将视觉信息拆解为可处理的几何单位。","<strong>审美偏好：</strong> 倾向于迪特·拉姆斯式的减法原则，‘少即是多’是你的视觉信仰。"] },
+            { title: "感性浪漫漫游者", sub: "Romantic Wanderer", tags: ["氛围感知","情感溢出","诗意解构"], condition: s => s.intuition > s.logic && s.context > 25, desc: "你拒绝被教条定义。模糊的边界、意外的颤动才是你眼中的视觉真相。", complex: ["<strong>处理逻辑：</strong> 你捕捉的是‘情绪的溢出’。视觉对你是一场流动的感官诗学，而非死板的制图。","<strong>直觉深度：</strong> 你能敏锐察觉秩序之外的微妙美感，擅长在无序中发现诗意。"] },
+            { title: "系统架构平衡师", sub: "Structural Architect", tags: ["系统统摄","动态均衡","节点思维"], condition: s => s.balance > 25 && s.logic > 20, desc: "你在寻找一种动态的永恒。你不仅在意点的位置，更在意它如何牵动整个空间的力场。", complex: ["<strong>核心逻辑：</strong> 星座思维。你能将散乱的视觉碎片通过内在逻辑连接成整体。","<strong>美学高度：</strong> 你重视比例的黄金律，在极简的形态中注入了深邃的哲学。"] },
+            { title: "抽象解构主义者", sub: "Deconstructionist", tags: ["符号叛逆","非线性","空无力量"], condition: s => s.abstraction > 25, desc: "你是视觉意义的‘叛逆者’。你热衷于拆解习以为常的符号，并从虚空中建立新的联系。", complex: ["<strong>处理逻辑：</strong> 非代表性感知。你擅长剥离功能的伪装，直接观测形式能量。","<strong>美学底座：</strong> 意识的感受才是一切视觉的终极目的。"] }
         ];
 
         const mentors = {
-            logic: { name: "Dieter Rams", style: "极简功能主义", quote: "“好的设计是尽可能的少。回归纯粹，回归简约。”", books: ["《设计的本质》", "《包豪斯理想》"] },
+            logic: { name: "Dieter Rams", style: "极简理性主义", quote: "“好的设计是尽可能的少。回归纯粹，回归简约。”", books: ["《设计的本质》", "《包豪斯理想》"] },
             intuition: { name: "Josef Albers", style: "色彩互动主义", quote: "“在艺术中，一加一不仅等于二，更能产生感性的张力。”", books: ["《色彩交互学》", "《观看之道》"] },
             abstraction: { name: "Kazimir Malevich", style: "至上主义", quote: "“客观世界本身毫无意义，意识的感受才是一切。”", books: ["《无物之界》", "《艺术的维度》"] }
         };
@@ -382,7 +508,7 @@
                 ? `<div class="moire-specimen" id="spec-box"><div class="moire-base"></div><div class="moire-lens" id="lens-box"></div></div>`
                 : (q.type === 'svg' ? `<div class="quiz-visual-box">${q.content}</div>` : `<div class="py-16 opacity-5"><span class="text-7xl">❂</span></div>`);
 
-            container.innerHTML = `${visualHtml}<div class="text-center space-y-10 w-full"><h2 class="text-xl md:text-2xl font-black italic serif-en leading-tight px-6">${q.text}</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl mx-auto px-4 pb-16">${q.options.map((opt, i) => `<button onclick="handleAnswer(${i})" class="action-btn"><span class="font-black opacity-30 mr-3">${String.fromCharCode(65+i)}.</span> <span class="font-medium">${opt.text}</span></button>`).join('')}</div></div>`;
+            container.innerHTML = `${visualHtml}<div class="text-center space-y-10 w-full"><h2 class="text-xl md:text-2xl font-black italic serif-en leading-tight px-6">${q.text}</h2><div class="flex flex-col gap-2 w-full max-w-2xl mx-auto px-4 pb-16">${q.options.map((opt, i) => `<button onclick="handleAnswer(${i})" class="action-btn"><span class="font-black opacity-30 mr-3">${String.fromCharCode(65+i)}.</span> <span class="font-medium">${opt.text}</span></button>`).join('')}</div></div>`;
             if (q.type === 'moire') {
                 const box = document.getElementById('spec-box'), lens = document.getElementById('lens-box');
                 const handler = (e) => {
@@ -418,24 +544,55 @@
             nextScreen('result');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             const arch = archetypes.find(a => a.condition(scores)) || archetypes[0];
-            document.getElementById('popular-archetype').innerText = arch.title;
-            document.getElementById('archetype-subtitle').innerText = arch.sub;
-            document.getElementById('archetype-tags').innerHTML = arch.tags.map(t => `<span class="tag-pill"># ${t}</span>`).join('');
-            document.getElementById('result-desc-complex').innerHTML = arch.complex.map(t => `<p>${t}</p>`).join('');
+            const setV = (id, v) => { const el = document.getElementById(id); if(el) el.innerHTML = v; };
+            const setT = (id, v) => { const el = document.getElementById(id); if(el) el.innerText = v; };
+
+            setT('popular-archetype', arch.title);
+            setT('archetype-subtitle', arch.sub);
+            setV('archetype-tags', arch.tags.map(t => `<span class="tag-pill"># ${t}</span>`).join(''));
+            setV('result-desc-complex', arch.complex.map(t => `<p>${t}</p>`).join(''));
+
             const lPct = Math.round((scores.logic / (scores.logic + scores.intuition + 1)) * 100);
-            document.getElementById('logic-percent').innerText = lPct + '%';
-            document.getElementById('emotion-percent').innerText = (100 - lPct) + '%';
+            setT('logic-percent', lPct + '%');
+            setT('emotion-percent', (100 - lPct) + '%');
+
             const primaryKey = scores.logic >= scores.intuition ? (scores.abstraction > 20 ? 'abstraction' : 'logic') : 'intuition';
             const mentor = mentors[primaryKey];
-            document.getElementById('mentor-name').innerText = mentor.name;
-            document.getElementById('mentor-style').innerText = mentor.style;
-            document.getElementById('mentor-quote').innerText = mentor.quote;
-            document.getElementById('book-list').innerHTML = mentor.books.map(b => `<div class="border-l border-white/30 pl-4 py-1 text-[11px] text-left">· ${b}</div>`).join('');
-            document.getElementById('visual-glossary').innerHTML = Object.entries(glossary).map(([k, v]) => `<div class="p-4 bg-white border border-black/5 rounded-lg shadow-sm"><div><p class="text-xs font-black text-gray-900 mb-1 uppercase tracking-widest">${k}</p><p class="text-[10px] text-gray-500 leading-relaxed font-light">${v}</p></div></div>`).join('');
-            const s1 = (scores.logic / (scores.logic + scores.intuition + 1)) * 100, s2 = (scores.macro / (scores.macro + (scores.micro || 0) + 1)) * 100;
-            document.getElementById('spec-1').style.left = `${Math.min(90, Math.max(10, 100 - s1))}%`;
-            document.getElementById('spec-2').style.left = `${Math.min(90, Math.max(10, s2))}%`;
-            new Chart(document.getElementById('radarChart').getContext('2d'), { type: 'radar', data: { labels: ['秩序', '感性', '精确', '语境', '律动', '平衡', '抽象'], datasets: [{ data: [scores.logic, scores.intuition, scores.precision, scores.context, scores.rhythm, scores.balance, scores.abstraction], backgroundColor: 'rgba(217, 141, 141, 0.2)', borderColor: '#d98d8d', borderWidth: 1.5, pointBackgroundColor: '#d98d8d' }] }, options: { scales: { r: { ticks: { display: false }, grid: { color: 'rgba(0,0,0,0.05)' }, pointLabels: { font: { size: 10, weight: '600' } } } }, plugins: { legend: { display: false } } } });
+            setT('mentor-name', mentor.name);
+            setT('mentor-style', mentor.style);
+            setT('mentor-quote', mentor.quote);
+            setV('book-list', mentor.books.map(b => `<div class="border-l border-white/30 pl-4 py-1 text-[11px] text-left">· ${b}</div>`).join(''));
+
+            setV('visual-glossary', Object.entries(glossary).map(([k, v]) => `
+                <div class="p-4 bg-white border border-black/5 rounded-lg shadow-sm">
+                    <div><p class="text-xs font-black text-gray-900 mb-1 uppercase tracking-widest">${k}</p>
+                    <p class="text-[10px] text-gray-500 leading-relaxed font-light">${v}</p></div>
+                </div>
+            `).join(''));
+
+            const s1 = (scores.logic / (scores.logic + scores.intuition + 1)) * 100;
+            const s2 = (scores.macro / (scores.macro + (scores.micro || 0) + 1)) * 100;
+            const sp1 = document.getElementById('spec-1'), sp2 = document.getElementById('spec-2');
+            if(sp1) sp1.style.left = `${Math.min(90, Math.max(10, 100 - s1))}%`;
+            if(sp2) sp2.style.left = `${Math.min(90, Math.max(10, s2))}%`;
+
+            new Chart(document.getElementById('radarChart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['秩序', '感性', '精确', '语境', '律动', '平衡', '抽象'],
+                    datasets: [{
+                        data: [scores.logic, scores.intuition, scores.precision, scores.context, scores.rhythm, scores.balance, scores.abstraction],
+                        backgroundColor: 'rgba(217, 141, 141, 0.2)',
+                        borderColor: '#d98d8d',
+                        borderWidth: 1.5,
+                        pointBackgroundColor: '#d98d8d'
+                    }]
+                },
+                options: {
+                    scales: { r: { ticks: { display: false }, grid: { color: 'rgba(0,0,0,0.05)' }, pointLabels: { font: { size: 10, weight: '600' } } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
         }
 
         async function saveAsImage() {
