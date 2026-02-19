@@ -43,7 +43,6 @@
         .axis-x { height: 1px; width: 100%; top: 50%; }
         .axis-y { width: 1px; height: 100%; left: 50%; }
 
-        /* 首页流光氛围 */
         .color-blob {
             position: absolute; width: 320px; height: 320px; border-radius: 50%;
             filter: blur(90px); opacity: 0.15; z-index: -1;
@@ -238,7 +237,6 @@
                     <div class="absolute -top-4 -left-4 text-9xl opacity-5 serif-en select-none">“</div>
                     <p class="mono-en text-[0.6rem] opacity-40 uppercase tracking-widest font-bold">Spiritual Mentor</p>
                     <div class="space-y-2">
-                        <!-- 精神导师中文名更新 -->
                         <h3 id="mentor-name" class="text-3xl font-black border-b border-black/10 pb-2 inline-block text-gray-800 text-center w-full"></h3>
                         <p id="mentor-style" class="mono-en text-[0.55rem] opacity-40 uppercase mt-1 tracking-widest text-center"></p>
                     </div>
@@ -271,7 +269,6 @@
     </main>
 
     <script>
-        // --- 30 道深度智性、去重、原创题库 ---
         const quizData = [
             { text: "01. 在莫瑞波纹产生的知觉干涉中，你下意识倾向于捕捉？", type: 'moire', options: [
                 { text: "底层恒定的几何网格系统", score: { logic: 6, precision: 5, micro: 5 } },
@@ -279,47 +276,47 @@
                 { text: "均衡律动的重叠平衡感", score: { balance: 6, abstraction: 4 } },
                 { text: "边界模糊产生的视觉眩晕", score: { intuition: 4, context: 6 } }
             ]},
-            { text: "02. 观测下方色块分布，你认为哪种更契合你的直觉共鸣？", type: 'svg', content: `<svg width="340" height="200" viewBox="0 0 340 200"><rect x="10" y="30" width="70" height="140" fill="#d98d8d" opacity="0.8"/><rect x="90" y="30" width="70" height="140" fill="#82b0b0" opacity="0.8"/><rect x="170" y="30" width="70" height="140" fill="#c5a059" opacity="0.8"/><rect x="250" y="30" width="70" height="140" fill="#1a1a1a" opacity="0.8"/></svg>`, options: [
+            { text: "02. 观测下方色块分布，你认为哪种更契合你的直觉共鸣？", type: 'svg', content: `<svg width="340" height="240" viewBox="0 0 340 240"><rect x="10" y="50" width="70" height="140" fill="#d98d8d" opacity="0.8"/><rect x="90" y="50" width="70" height="140" fill="#82b0b0" opacity="0.8"/><rect x="170" y="50" width="70" height="140" fill="#c5a059" opacity="0.8"/><rect x="250" y="50" width="70" height="140" fill="#1a1a1a" opacity="0.8"/></svg>`, options: [
                 { text: "层次分明的有序灰度排列", score: { logic: 7, precision: 6 } },
                 { text: "带有情绪张力的色彩碰撞", score: { intuition: 7, context: 6 } },
                 { text: "寻求各色域之间的微妙平衡", score: { balance: 8, logic: 5 } },
                 { text: "消解色彩，回归纯粹极简", score: { logic: 8, abstraction: 6 } }
             ]},
-            { text: "03. 哪种几何原型的排列逻辑带给你更深的安定感？", type: 'svg', content: `<svg width="400" height="180" viewBox="0 0 400 180"><rect x="25" y="60" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/><circle cx="145" cy="90" r="35" stroke="black" fill="none" stroke-width="1.5"/><line x1="255" y1="120" x2="295" y2="60" stroke="black" stroke-width="2"/><path d="M350,100 Q375,50 400,100" stroke="black" fill="none" stroke-width="2"/></svg>`, options: [
+            { text: "03. 哪种几何原型的等分排列逻辑，带给你更深的安定感？", type: 'svg', content: `<svg width="400" height="180" viewBox="0 0 400 180"><rect x="25" y="60" width="60" height="60" stroke="black" fill="none" stroke-width="1.5"/><circle cx="145" cy="90" r="35" stroke="black" fill="none" stroke-width="1.5"/><line x1="255" y1="120" x2="295" y2="60" stroke="black" stroke-width="2"/><path d="M350,100 Q375,50 400,100" stroke="black" fill="none" stroke-width="2"/></svg>`, options: [
                 { text: "方块：逻辑与秩序的确凿边界", score: { logic: 7, precision: 7 } },
                 { text: "圆形：统摄与和谐的自我闭环", score: { balance: 7, intuition: 3 } },
                 { text: "斜线：速度与能量的明确指向", score: { rhythm: 6, logic: 4 } },
                 { text: "曲线：感性与有机的无限叙事", score: { intuition: 7, context: 6 } }
             ]},
-            { text: "04. 早晨醒来，你希望窗外的第一眼风景是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="40" y="20" width="100" height="110" fill="none" stroke="black" stroke-width="1.5"/><path d="M180,20 Q230,80 180,140 M210,10 Q280,75 210,140" stroke="black" fill="none" opacity="0.3"/></svg>`, options: [
+            { text: "04. 面对一扇理想居所的落地窗，你最向往的外部景观是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="40" y="20" width="100" height="110" fill="none" stroke="black" stroke-width="1.5"/><path d="M180,20 Q230,80 180,140 M210,10 Q280,75 210,140" stroke="black" fill="none" opacity="0.3"/></svg>`, options: [
                 { text: "轮廓分明的建筑，线条清晰有力", score: { logic: 7, precision: 6 } },
-                { text: "晨雾笼罩的湖泊，光影轻盈跳动", score: { intuition: 7, context: 6 } },
+                { text: "雾气氤氲的湖泊，光影轻盈跳动", score: { intuition: 7, context: 6 } },
                 { text: "交错的城市街道，充满向心力", score: { balance: 6, logic: 5 } },
                 { text: "无边界的天际线，宏大且空无", score: { macro: 7, abstraction: 5 } }
             ]},
-            { text: "05. 整理工作台时，你的驱动力本能倾向于是？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="20" y="40" width="50" height="25" fill="black"/><rect x="80" y="40" width="50" height="25" fill="black"/><rect x="140" y="40" width="50" height="25" fill="black"/><path d="M220,50 L320,50" stroke="black" stroke-width="0.2" stroke-dasharray="2,2"/></svg>`, options: [
+            { text: "05. 整理个人工作台时，你的驱动力本能倾向于是？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="20" y="40" width="50" height="25" fill="black"/><rect x="80" y="40" width="50" height="25" fill="black"/><rect x="140" y="40" width="50" height="25" fill="black"/><path d="M220,50 L320,50" stroke="black" stroke-width="0.2" stroke-dasharray="2,2"/></svg>`, options: [
                 { text: "严丝合缝的垂直对齐与严密分类", score: { logic: 8, precision: 8 } },
                 { text: "保留富有呼吸感的随机留白间隙", score: { balance: 7, abstraction: 5 } },
                 { text: "根据使用频率构成的动态路径", score: { rhythm: 7, context: 5 } },
                 { text: "并不在意，享受随意的无序", score: { intuition: 6, rad: 7 } }
             ]},
-            { text: "06. 哪种线条/笔触更能让你产生强烈的审美共鸣？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="10" y="10" width="140" height="130" stroke="black" fill="none" stroke-width="0.3"/><circle cx="80" cy="75" r="40" stroke="black" fill="none" stroke-dasharray="1,2"/><path d="M190,20 Q240,10 280,60 T320,130" stroke="black" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/></svg>`, options: [
-                { text: "严谨、理性的数学化格栅系统", score: { logic: 8, precision: 9 } },
-                { text: "充满张力、偶然的水墨/溅墨感", score: { intuition: 9, abstraction: 7 } },
-                { text: "多维度叠压形成的结构层次", score: { balance: 8, macro: 6 } },
-                { text: "带有呼吸感与温度的手绘痕迹", score: { context: 8, intuition: 7 } }
+            { text: "06. 观看这个旋转中心，你捕捉到的是？", type: 'svg', content: `<div class="w-36 h-36 border border-black/10 rounded-full flex items-center justify-center animate-[spin_15s_linear_infinite] mx-auto"><div class="w-24 h-0.5 bg-black/60"></div></div>`, options: [
+                { text: "周而复始、精确的时间规律感", score: { logic: 7, precision: 7 } },
+                { text: "轨迹模糊化带来的视觉残影美", score: { abstraction: 8, context: 6 } },
+                { text: "向心的视觉引力与封闭结构", score: { balance: 7, micro: 5 } },
+                { text: "流动的、无始无终的变幻意蕴", score: { intuition: 8, rhythm: 8 } }
             ]},
             { text: "07. 在一个极简设计的展厅里，你更在意的是？", options: [
                 { text: "展品之间精密的比例与尺度关系", score: { logic: 8, precision: 7 } },
-                { text: "光线在墙面上形成的扩散氛围", score: { intuition: 8, context: 8 } },
+                { text: "光线在墙面上形成的氛围扩散", score: { intuition: 8, context: 8 } },
                 { text: "展品本身微小、确凿的工艺细节", score: { precision: 9, micro: 8 } },
                 { text: "整个空间宏大且虚空的叙事感", score: { macro: 8, abstraction: 7 } }
             ]},
-            { text: "08. 面对一扇透视窗户，你的注意力终点是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><rect x="100" y="20" width="140" height="110" fill="none" stroke="black" stroke-width="1"/><line x1="170" y1="20" x2="170" y2="130" stroke="black"/><line x1="100" y1="75" x2="240" y2="75" stroke="black"/></svg>`, options: [
-                { text: "建筑构成的垂直地平线规律", score: { logic: 7, precision: 6 } },
-                { text: "光影洒进窗框时的氛围扩散", score: { intuition: 7, context: 8 } },
-                { text: "不同距离景物的叠压层次感", score: { balance: 6, macro: 7 } },
-                { text: "窗框作为几何图形的纯粹解构", score: { abstraction: 8, logic: 5 } }
+            { text: "08. 请选出你此刻最欣赏的笔触/线条质感？", type: 'svg', content: `<svg width="340" height="120" viewBox="0 0 340 120"><line x1="20" y1="40" x2="120" y2="40" stroke="black" stroke-width="2.5"/><line x1="180" y1="40" x2="280" y2="40" stroke="black" stroke-width="2.5" stroke-dasharray="8,5"/><polyline points="20,90 35,80 50,100 65,80 80,100 120,90" fill="none" stroke="black" stroke-width="2"/><path d="M180,90 C195,85 210,95 240,90" fill="none" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>`, options: [
+                { text: "连续、平稳、作为定论出现的结论实线", score: { logic: 8, precision: 7 } },
+                { text: "跳跃、虚幻、作为某种假设的探索虚线", score: { intuition: 7, rad: 6 } },
+                { text: "由重叠产生的视觉干扰波动美感", score: { abstraction: 8, rhythm: 6 } },
+                { text: "手写墨迹扩散出的随机生命力", score: { context: 8, intuition: 7 } }
             ]},
             { text: "09. 哪种材质对比更让你感到审美上的治愈？", options: [
                 { text: "冰冷的精钢与极致透明的玻璃", score: { logic: 9, precision: 8 } },
@@ -340,9 +337,9 @@
                 { text: "D. 整张画面的网格底纹逻辑 (System)", score: { logic: 7, ref: 6 } }
             ]},
             { text: "12. 整理个人藏书时，你下意识的分类逻辑是？", options: [
-                { text: "严格按照拼音或学科属性的纵向切分", score: { logic: 8, precision: 9 } },
+                { text: "严格按照学科属性或纵向逻辑切分", score: { logic: 8, precision: 9 } },
                 { text: "按照封面颜色形成的感性色谱流动", score: { intuition: 8, context: 6 } },
-                { text: "高低不齐，但追求视觉重心的动态均衡", score: { balance: 9, rhythm: 5 } },
+                { text: "高低不齐，但追求重心的动态均衡", score: { balance: 9, rhythm: 5 } },
                 { text: "随机堆叠，享受一种充满活力的杂乱", score: { rad: 8, abstraction: 7 } }
             ]},
             { text: "13. 面对这种光影交错，你的第一知觉反应是？", type: 'svg', content: `<svg width="340" height="150" viewBox="0 0 340 150"><defs><linearGradient id="gl" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:black;stop-opacity:1" /><stop offset="100%" style="stop-color:white;stop-opacity:1" /></linearGradient></defs><rect x="0" y="0" width="340" height="150" fill="url(#gl)" opacity="0.3"/><path d="M40,20 L300,130" stroke="black" stroke-width="0.5" stroke-dasharray="4,4"/></svg>`, options: [
@@ -351,22 +348,22 @@
                 { text: "虚线切分产生的视觉节奏与跳跃感", score: { rhythm: 8, balance: 7 } },
                 { text: "光影作为独立符号的几何抽象感", score: { abstraction: 9, rad: 7 } }
             ]},
-            { text: "14. 在一个复杂的信息界面中，你的注意力倾向于？", options: [
-                { text: "优先捕捉数据间的严谨因果链条", score: { logic: 9, precision: 8 } },
-                { text: "整体配色方案营造的视觉首要印象", score: { intuition: 8, context: 7 } },
-                { text: "图表控件的对称性与比例和谐度", score: { balance: 8, micro: 6 } },
-                { text: "这种数字化呈现形式的解构与重组", score: { abstraction: 8, rad: 8 } }
+            { text: "14. 面对错觉图形，你的大脑首选：", options: [
+                { text: "本能地还原其背后的三维物理逻辑", score: { logic: 8, precision: 6 } },
+                { text: "享受这种荒谬交错带来的知觉快感", score: { abstraction: 9, rad: 7 } },
+                { text: "通过寻找重复规律来解构这组幻觉", score: { logic: 7, balance: 6 } },
+                { text: "被图形色彩或笔触的细节所留住", score: { intuition: 6, precision: 7 } }
             ]},
-            { text: "15. 观察下方的几何偏移，你最在意哪点？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="100" y="30" width="60" height="40" fill="black"/><rect x="180" y="40" width="60" height="40" fill="black" opacity="0.4"/></svg>`, options: [
+            { text: "15. 观察这组几何偏移，你最在意的细微之处是？", type: 'svg', content: `<svg width="340" height="100" viewBox="0 0 340 100"><rect x="100" y="30" width="60" height="40" fill="black"/><rect x="180" y="40" width="60" height="40" fill="black" opacity="0.4"/></svg>`, options: [
                 { text: "中心轴线的偏离数值 (Error)", score: { logic: 8, precision: 8 } },
                 { text: "由于偏移产生的动态追逐趋势", score: { rhythm: 7, rad: 6 } },
                 { text: "重合部分产生的视觉深度 (Depth)", score: { balance: 6, context: 7 } },
                 { text: "几何交叠处的逻辑重构意义", score: { abstraction: 9, logic: 6 } }
             ]},
             { text: "16. 看到自然界的树木枝桠，你本能地关注：", options: [
-                { text: "其分形数学规律的重复性", score: { logic: 8, precision: 7 } },
-                { text: "枝干在空气中摇曳出的韵律美", score: { intuition: 8, rhythm: 9 } },
-                { text: "枯木与苍穹构成的负空间剪影", score: { balance: 7, abstraction: 9 } },
+                { text: "其不断分形、重复的数学化增长规律", score: { logic: 8, precision: 7 } },
+                { text: "枝干在空气中摇曳出的韵律美感", score: { intuition: 8, rhythm: 9 } },
+                { text: "枯木与苍穹构成的负空间剪影张力", score: { balance: 7, abstraction: 9 } },
                 { text: "肌理中沉淀出的生命微观细节", score: { context: 8, micro: 9 } }
             ]},
             { text: "17. 当信息流出现无序噪声干扰时，你会？", options: [
@@ -382,7 +379,7 @@
                 { text: "这种嵌套逻辑传达出的比例严谨度", score: { logic: 8, balance: 7 } }
             ]},
             { text: "19. 你倾向于在何种视觉密度中停留更久？", options: [
-                { text: "极致简洁：单一线条的绝对纯粹", score: { logic: 9, abstraction: 8 } },
+                { text: "极致简洁：单一线条带来的绝对纯粹", score: { logic: 9, abstraction: 8 } },
                 { text: "适度叠加：有呼吸感的有序排列", score: { balance: 9, precision: 7 } },
                 { text: "极度繁复：充满生命力与偶然的堆砌", score: { intuition: 9, context: 8 } },
                 { text: "解构拼贴：不同逻辑碎片碰撞的偶发感", score: { abstraction: 10, rad: 9 } }
@@ -393,7 +390,7 @@
                 { text: "关注水滴在叶片重心处的平衡压力", score: { balance: 8, abstraction: 6 } },
                 { text: "观察微观纹理中呈现的重复规律", score: { precision: 8, micro: 9 } }
             ]},
-            { text: "21. 一个新城市的俯瞰图，最先吸引你的是？", options: [
+            { text: "21. 一个城市的空中俯瞰图，最先吸引你的是？", options: [
                 { text: "街道网格化所呈现出的功能逻辑", score: { logic: 8, precision: 7 } },
                 { text: "万家灯火汇聚成的弥散氛围场", score: { intuition: 9, context: 8 } },
                 { text: "新旧建筑更迭产生的视觉断层", score: { balance: 7, abstraction: 8 } },
@@ -411,11 +408,11 @@
                 { text: "带有岁月沉淀质感的非人造痕迹", score: { context: 9, intuition: 8 } },
                 { text: "彻底打破常规直觉的知性冷感", score: { rad: 9, rhythm: 7 } }
             ]},
-            { text: "24. 你对视觉上的“完整感”定义倾向于是？", options: [
-                { text: "闭合的框架，毫无遗漏的逻辑终点", score: { logic: 8, balance: 7 } },
-                { text: "向外溢出的能量，充满想象的留白", score: { intuition: 8, macro: 8 } },
-                { text: "不同维度在某个切面上的精准交汇", score: { balance: 9, precision: 7 } },
-                { text: "由于碎片堆叠形成的庞大叙事感", score: { abstraction: 8, context: 7 } }
+            { text: "24. 你认为哪种定义的“美学深度”更具思辨价值？", options: [
+                { text: "能够被数学公式精准拆解的平衡", score: { logic: 9, precision: 8 } },
+                { text: "能够引发灵魂瞬间震颤的留白", score: { intuition: 9, context: 7 } },
+                { text: "能够统摄不同维度的复杂系统", score: { balance: 8, logic: 7 } },
+                { text: "彻底消解意义后的纯粹感受", score: { abstraction: 10, rad: 9 } }
             ]},
             { text: "25. 面对一处老工厂的工业遗迹，你看到的是：", options: [
                 { text: "对原有机械功能的严密结构回溯", score: { logic: 8, precision: 7 } },
@@ -441,25 +438,24 @@
                 { text: "十字轴心与圆构成的原始秩序感", score: { balance: 9, abstraction: 6 } },
                 { text: "空间被网格切分后形成的重构博弈", score: { abstraction: 9, rad: 8 } }
             ]},
-            { text: "29. 视觉直觉的本质是什么？", options: [
+            { text: "29. 视觉直觉对你而言，其本质更接近：", options: [
                 { text: "一种内化的数学建模与逻辑纠错系统", score: { logic: 10, precision: 9 } },
                 { text: "一次灵魂与外界氛围的瞬间生命共振", score: { intuition: 10, context: 9 } },
                 { text: "对世界客观关系的统摄与动态均衡", score: { balance: 10, macro: 8 } },
                 { text: "在碎片中发现非线性规律的解构旅程", score: { abstraction: 10, rad: 10 } }
             ]},
-            { text: "30. 观测这张星图，你的终极知觉反馈是？", type: 'svg', content: `<svg viewBox="0 0 200 200" class="w-48 h-48 opacity-40"><circle cx="100" cy="100" r="90" stroke="black" fill="none" stroke-dasharray="1,3"/><circle cx="100" cy="100" r="4" fill="black"/><path d="M60,60 L140,140 M140,60 L60,140" stroke="black" stroke-width="0.2"/></svg>`, options: [
+            { text: "30. 观测这张最后的星图，你的终极反馈是？", type: 'svg', content: `<svg viewBox="0 0 200 200" class="w-48 h-48 opacity-40"><circle cx="100" cy="100" r="90" stroke="black" fill="none" stroke-dasharray="1,3"/><circle cx="100" cy="100" r="4" fill="black"/><path d="M60,60 L140,140 M140,60 L60,140" stroke="black" stroke-width="0.2"/></svg>`, options: [
                 { text: "秩序的终点：一切终将归于确凿结论", score: { logic: 9, precision: 8 } },
                 { text: "漫游的起点：一切均在流动与变幻中", score: { intuition: 10, macro: 8 } },
-                { text: "平衡的极致：寻找那个静止的核心", score: { balance: 10, micro: 7 } },
-                { text: "解构的自由：看到点线面背后的本质", score: { abstraction: 10, rad: 9 } }
+                { text: "平衡的极致：在失序中寻找静止核心", score: { balance: 10, micro: 7 } },
+                { text: "解构的自由：看到点线面背后的无物", score: { abstraction: 10, rad: 9 } }
             ]}
         ];
 
-        // --- 画像逻辑：精神导师中文名已更新 ---
         const archetypes = [
             { title: "理性极简主义者", sub: "Orderly Anatomist", tags: ["理性重构","冷感美学","极致减法"], condition: s => s.logic > s.intuition && s.precision > 25, desc: "你拥有一双近乎‘X光’的眼睛。在纷杂表象下，你总能瞬间识别出支撑现实的骨架。", complex: ["<strong>处理逻辑：</strong> 格栅化本能。你习惯将视觉信息拆解为可处理的几何单位。","<strong>审美偏好：</strong> 倾向于迪特·拉姆斯式的减法原则，‘少即是多’是你的视觉信仰。"], advice: ["保持桌面绝对空旷，通过单一光源聚焦。","你是架构师型人格，擅长将混沌转化为秩序。"] },
             { title: "感性浪漫漫游者", sub: "Romantic Wanderer", tags: ["氛围感知","情感溢出","流动诗学"], condition: s => s.intuition > s.logic && s.context > 25, desc: "你拒绝被教条的几何定义。模糊的边界、意外的颤动才是你眼中的视觉真相。", complex: ["<strong>处理逻辑：</strong> 你捕捉的是‘情绪的溢出’。视觉对你是一场流动的感官诗学。","<strong>直觉深度：</strong> 你能敏锐察觉秩序之外的微妙美感，擅长在无序中发现诗意。"], advice: ["倾向于柔和的自然光与有机质地。","为你的感性留白，这种‘不确定性’正是你灵感的泉源。"] },
-            { title: "系统架构平衡师", sub: "Structural Architect", tags: ["系统统摄","动态均衡","节点思维"], condition: s => s.balance > 25 && s.logic > 20, desc: "你在寻找一种动态的永恒。你不仅在意点的位置，更在意它如何牵动整个空间的力场。", complex: ["<strong>核心逻辑：</strong> 星座思维。你能将散乱的视觉碎片通过内在逻辑连接成整体的认知星图。","<strong>美学高度：</strong> 你重视比例的黄金律，在极简的形态中注入了深邃的哲学。"], advice: ["重视比例黄金律，理想环境应有强烈的向心力。","作为一个平衡者，你总能敏锐察觉系统内部的不协调。"] },
+            { title: "系统架构平衡师", sub: "Structural Architect", tags: ["系统统摄","动态均衡","节点思维"], condition: s => s.balance > 25 && s.logic > 20, desc: "你在寻找一种动态的永恒。你不仅在意点的位置，更在意它如何牵动整个空间的力场。", complex: ["<strong>核心逻辑：</strong> 星座思维。你能将散乱的视觉碎片通过内在逻辑连接成整体。","<strong>美学高度：</strong> 你重视比例的黄金律，在极简的形态中注入了深邃的哲学。"], advice: ["重视比例黄金律，理想环境应有强烈的向心力。","作为一个平衡者，你总能敏锐察觉系统内部的不协调。"] },
             { title: "抽象解构主义者", sub: "Deconstructionist", tags: ["符号叛逆","非线性","空无力量"], condition: s => s.abstraction > 25, desc: "你是视觉意义的‘叛逆者’。你热衷于拆解习以为常的符号，并从虚空中建立新的联系。", complex: ["<strong>处理逻辑：</strong> 非代表性感知。你擅长剥离功能的伪装，直接观测形式能量。","<strong>美学底座：</strong> 意识的感受才是一切视觉的终极目的。"], advice: ["偏好非对称剪裁与极具视觉冲突的排版。","寻找维度的飞跃，不满足于表面化的解释。"] }
         ];
 
